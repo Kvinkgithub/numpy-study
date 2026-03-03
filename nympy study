@@ -1,0 +1,110 @@
+import numpy as np
+# 1. СОЗДАНИЕ МАССИВОВ
+
+arr1 = np.array([1, 2, 3, 4, 5])
+print(f"array: {arr1}")
+
+arr2 = np.zeros((3, 4))
+print(f"zeros:\n{arr2}")
+
+arr3 = np.ones((2, 3))
+print(f"ones:\n{arr3}")
+
+arr4 = np.arange(0, 10, 2)
+print(f"arange: {arr4}")
+
+arr5 = np.linspace(0, 10, 5)  #cоздает указанное количество равномерно распределенных чисел между началом и концом
+print(f"linspace: {arr5}")
+
+arr6 = np.eye(4) #единичная матрица,делает 1 на главной диогонали и нули в остольных
+print(f"eye:\n{arr6}")
+
+arr7 = np.random.rand(3, 3) # от 0 до 1 заполняет массим
+print(f"random.rand:\n{arr7}")
+
+# 2. ИЗМЕНЕНИЕ ФОРМЫ
+
+original = np.arange(12)
+print(f"original: {original}")
+reshaped = original.reshape(3, 4)
+print(f"reshape (3x4):\n{reshaped}")
+
+flat = reshaped.flatten() #становится плоским массив
+print(f"flatten: {flat}")
+
+transposed = reshaped.T  # .T делает так что бы строки стали столбцами
+print(f"transpose:\n{transposed}")
+
+# НЕДОСТАЮЩИЙ МЕТОД 11: resize()
+resized = np.resize(original, (2, 6))  # изменяет размер с повторением данных
+print(f"resize (2x6):\n{resized}")
+
+# НЕДОСТАЮЩИЙ МЕТОД 12: newaxis
+vector = np.array([1, 2, 3])
+col_vector = vector[:, np.newaxis]  # добавляет новое измерение
+row_vector = vector[np.newaxis, :]
+print(f"newaxis:")
+print(f"  Было: {vector}, shape: {vector.shape}")
+print(f"  Столбец:\n{col_vector}, shape: {col_vector.shape}")
+print(f"  Строка: {row_vector}, shape: {row_vector.shape}")
+
+# 3. МАТЕМАТИЧЕСКИЕ ОПЕРАЦИИ
+
+math_arr = np.array([1, 2, 3, 4, 5])
+print(f"Исходный: {math_arr}")
+print(f"sum: {np.sum(math_arr)}")
+print(f"mean: {np.mean(math_arr):.2f}") # средние арифмитическое вычесляет, а :.2f нужно чтоб было число с плав.точкой и 2 символа после запятой
+print(f"max: {np.max(math_arr)}, min: {np.min(math_arr)}")
+print(f"std: {np.std(math_arr):.2f}") # разброс выводит значений
+
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[5, 6], [7, 8]])
+print(f"dot product:\n{np.dot(a, b)}") # матричное умножение
+
+print(f"sqrt: {np.sqrt(math_arr)}") #квадратный корень
+print(f"exp: {np.exp(math_arr)}") # экспоненту для каждого эл
+print(f"log: {np.log(math_arr)}") # натуральный логарифм
+
+# 4. ИНДЕКСАЦИЯ
+
+index_arr = np.array([10, 20, 30, 40, 50, 60, 70])
+print(f"Исходный: {index_arr}")
+
+indices = np.where(index_arr > 40) #выводит индексы элементов если подходият по условию
+print(f"where (>40): индексы {indices[0]}, значения {index_arr[indices]}")
+
+taken = np.take(index_arr, [0, 2, 4])  #извлекает элементы по индексам
+print(f"take [0,2,4]: {taken}")
+
+a_choice = np.array([1, 2, 3, 4, 5])
+b_choice = np.array([10, 20, 30, 40, 50])
+choices = np.choose([0, 1, 0, 1, 0], [a_choice, b_choice]) # Создает массив, выбирая элементы из нескольких массивов по указанным индексам.
+print(f"choose: {choices}")
+
+nonzero_arr = np.array([0, 5, 0, 10, 0, 15])
+print(f"nonzero {nonzero_arr}: {np.nonzero(nonzero_arr)[0]}") # Возвращает индексы ненулевых элементов массива.
+
+# 5. ОБЪЕДИНЕНИЕ
+
+a = np.array([1, 2, 3])
+b = np.array([4, 5, 6])
+print(f"concatenate: {np.concatenate([a, b])}") # обьеденение массивов
+print(f"vstack:\n{np.vstack([a, b])}") # делает вертикальное объеденение
+print(f"hstack: {np.hstack([a, b])}") # горизонтальное объеденение
+
+split_arr = np.arange(9)
+print(f"split {split_arr} -> 3 части: {np.split(split_arr, 3)}") # делит на части
+
+# 6. УТИЛИТЫ
+
+unique_arr = np.array([1, 2, 2, 3, 3, 3, 4, 4, 4, 4])
+print(f"unique {unique_arr}: {np.unique(unique_arr)}") #выводит уникальные элементы массива
+
+# savetxt/loadtxt
+save_arr = np.array([[1, 2, 3], [4, 5, 6]])
+np.savetxt('test.txt', save_arr, fmt='%d') #  fmt='%d чтоб формат был для целых чисел
+loaded = np.loadtxt('test.txt', dtype=int) # dtype=int чтоб читал как целые числа
+print(f"save/load:\n{loaded}")
+
+sorted_arr = np.sort([3, 1, 4, 1, 5, 9, 2])
+print(f"sort: {sorted_arr}")
