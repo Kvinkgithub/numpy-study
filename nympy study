@@ -108,3 +108,26 @@ print(f"save/load:\n{loaded}")
 
 sorted_arr = np.sort([3, 1, 4, 1, 5, 9, 2])
 print(f"sort: {sorted_arr}")
+
+
+#task
+print('='*20)
+task_arr=np.array([[4,1,4],
+                   [2, 0, 2],
+                   [2,2,2]])
+print(task_arr)
+
+take_arr=np.take(task_arr, [2,4,6])
+sum_arr=np.sum(take_arr)
+print(f'Cумма диоганали {sum_arr}')
+
+
+#oter вариант
+srez_arr=task_arr[0][-1]+task_arr[1][-2]+task_arr[2][-3]
+print(f'Сумма диагонали {srez_arr}')
+
+#еще 1
+diagonal_sum = 0
+for i in range(len(task_arr)):
+    diagonal_sum += task_arr[i, i]
+print(f'Сумма диагонали {diagonal_sum}')
